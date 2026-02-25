@@ -70,21 +70,15 @@ def calculate_avg_price_by_neighbourhood_group_and_room(listings):
 ##### TASK 3: CSV WRITER
 ###############################################################################
 def write_summary_csv(out_filename, avg_prices):
-    """
-    Write the summary statistics to a CSV file.
+    with open(out_filename, 'w', newline='', encoding='utf-8') as csvfile:
+        writer = csv.writer(csvfile)
 
-    Parameters:
-        out_filename : str
-            Path to output CSV file.
-        avg_prices : dictionary
-            dict mapping (neighbourhood_group, room_type) -> average_price (float)
-            e.g. { ('Manhattan', 'Entire home/apt'): 123.45, ... }
+        # Write header
+        writer.writerow(['neighbourhood_group', 'room_type', 'average_price'])
 
-    Returns:
-        None
-            Writes a CSV file with header: neighbourhood_group, room_type, average_price
-    """
-    pass
+        # Write data rows
+        for (neighbourhood_group, room_type), avg_price in avg_prices.items():
+            writer.writerow([neighbourhood_group, room_type, avg_price])
 
 ###############################################################################
 ##### UNIT TESTS (Do not modify the code below!)
